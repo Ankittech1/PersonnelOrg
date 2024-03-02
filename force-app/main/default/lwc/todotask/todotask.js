@@ -51,6 +51,7 @@ export default class Todotask extends LightningElement {
     validateTask()
     {
         let isvalidate=true;
+        console.log("isvalidate",isvalidate)
          let element=this.template.querySelector(".InputName");
         //if my task name is Empty then
         if(!this.taskname)
