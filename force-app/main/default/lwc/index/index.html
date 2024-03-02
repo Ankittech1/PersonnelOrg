@@ -1,0 +1,80 @@
+<template>
+    <div class="slds-grid slds-gutters slds-p-left_x-small">
+        <div class="slds-col slds-p-left_x-small">
+            <lightning-card title="Task Entry Form">
+                <div class="slds-p-left_x-small">
+                    <lightning-input type="text" name="taskname" label="Enter Task Name" placeholder="Enter Task Name"
+                        required="true" onchange={onchangeHandler} value={taskname}
+                        message-when-value-missing="Kindly Enter the Task Name" class="InputName">
+                    </lightning-input>
+                    <lightning-input type="date" name="taskdate" label="Enter Task Date" value={taskdate}
+                        field-level-help="Default End Date is Todays date" onchange={onchangeHandler}>
+                    </lightning-input>
+                </div>
+                <div class="slds-p-left_x-small slds-m-top_x-small slds-align_absolute-center">
+                    <lightning-button variant="brand" label="Reset" title="Reset" onclick={resethandleClick}
+                        class="slds-m-left_x-small slds-p-left_x-small">
+                    </lightning-button>
+                    <lightning-button variant="brand" label="Add Task" title="Add Task" onclick={addhandleClick}
+                        class="slds-m-left_x-small slds-p-left_x-small">
+                    </lightning-button>
+
+                </div>
+            </lightning-card>
+        </div>
+        <div class="slds-col slds-p-left_x-small">
+            <lightning-card title="Incomplete Task List">
+                <div class="slds-col slds-p-left_x-small">
+                    <template for:each={incompletetask} for:item="item" for:index="index">
+                        <div class="slds-col slds-p-left_x-small slds-box slds-theme_default background-color"
+                            key={item.taskname} draggable="true" ondragstart={dragStartHandler} data-it={index}>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_8-of-12">
+                                    <p>{item.taskname}</p>
+                                    <p><lightning-formatted-date-time value={item.taskdate} year="2-digit" month="short"
+                                            day="2-digit" weekday="long"></lightning-formatted-date-time></p>
+
+
+                                </div>
+                                <div class="slds-col slds-size_4-of-12">
+                                    <lightning-button-icon icon-name="utility:delete" alternative-text="Delete"
+                                        class="slds-m-left_xx-small slds-p-left_x-small" title="Delete"
+                                        onclick={removalHandler} name={index}></lightning-button-icon>
+                                    <lightning-button-icon icon-name="utility:check" alternative-text="Check"
+                                        class="slds-m-left_xx-small slds-p-left_x-small" title="Check"
+                                        onclick={CompleteHandler} name={index}></lightning-button-icon>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+        <div class="slds-col slds-p-left_x-small" ondragover={allowDrop} ondrop={dropElementHandler}>
+            <lightning-card title="Completed Task List">
+                <div class="slds-col slds-p-left_x-small">
+                    <template for:each={completetask} for:item="item">
+                        <div class="completed-backgroung-color slds-col slds-p-left_x-small slds-box slds-theme_default background-color"
+                            key={item.taskname}>
+                            <div>
+                                <p class="identifi">{item.taskname}</p>
+                                <p><lightning-formatted-date-time value={item.taskdate} year="2-digit" month="short"
+                                        day="2-digit" weekday="long"></lightning-formatted-date-time></p>
+
+                            </div>
+
+
+
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+
+
+
+</template>
