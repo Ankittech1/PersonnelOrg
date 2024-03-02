@@ -133,7 +133,7 @@ export default class Index extends LightningElement {
         console.log("this.completetask",this.completetask);
         if(this.incompletetask.length>0){
              let sortedarraylist =this.sortTask(this.incompletetask);
-         console.log("this.incompletetask",sortedarraylist)
+         console.log("this.incompletetask  ",sortedarraylist)
         this.incompletetask=[...sortedarraylist];
         }
     }
